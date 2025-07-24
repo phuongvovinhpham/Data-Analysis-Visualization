@@ -13,7 +13,7 @@ library(stats)
 setwd("D:/Phạm Võ Vĩnh Phương/RMIT University/Assessments/Sem 3/Time Series Analysis/Asm 2")
 
 # Read dataset
-bitcoin <- read_csv("assignment2Data2025.csv")
+bitcoin <- read_csv("Bitcoin_dataset.csv")
 
 #============================ Converting to time series & plot ============================
 # Convert to time series object
