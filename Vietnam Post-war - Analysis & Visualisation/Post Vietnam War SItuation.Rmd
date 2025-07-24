@@ -1,0 +1,1002 @@
+---
+title: "Storytelling with Data Visualization"
+author: "Phuong Vo Vinh Pham - s4078692"
+date: 'Last updated: `r format(Sys.time(), "%d %B, %Y")`'
+output:
+  flexdashboard::flex_dashboard:
+    storyboard: true
+    vertical_layout: fill
+subtitle: The Impact of The Vietnam War on The Nation's Development 
+---
+
+```{r setup, include=FALSE}
+# Use this chunk to quietly load your pacakges
+
+knitr::opts_chunk$set(
+	fig.align = "center",
+	message = FALSE,
+	warning = FALSE
+)
+# Packages loaded in this chunk will not appear in the presentation. 
+
+library(stringr)
+library(readr)
+library(dplyr)
+library(tidyr)
+library(lubridate)
+library(magrittr)
+library(glue)
+library(car)
+library(ggplot2)
+library(ggpol)
+library(ggrepel)
+library(cowplot)
+library(treemapify)
+library(sf)
+library(ggmap)
+library(flexdashboard)
+library(viridis)
+library(RColorBrewer)
+library(ggsankey)
+library(ggtext)
+library(ggdist)
+library(ggforce)
+```
+
+```{r, include=FALSE}
+#Set working directory
+setwd("C:/Users/ASUS/Desktop/Data Visualization_Asm 3")
+```
+
+```{r, include=FALSE}
+#Read Bombing data
+operation <- read_csv("THOR_Vietnam_Bombing_Operations.csv")
+
+#Read Aircraft data
+aircraft <- read_csv("THOR_VIET_AIRCRAFT_GLOSS.csv")
+
+#Read Weapon data
+weapon <- read_csv("THOR_VIET_WEAPON_GLOSS.csv")
+
+#Read deaths data
+death <- read_csv("number-of-deaths.csv")
+
+#Read US casualties data
+casualties_usa <- read_csv("US-Combat-Area-Casualties.csv")
+
+#Read Vietnam post-war agriculture data
+agri_output <- read_csv("agricultural-output-dollars.csv")
+agri_gdp <- read_csv("agriculture-share-gdp.csv")
+
+#Read Vietnam post-war shares of GDP data
+manu_gdp <- read_csv("manufacturing-value-added-to-gdp.csv")
+tourism_gdp <- read_csv("tourism-gdp-proportion-of-total-gdp.csv")
+trade_gdp <- read_csv("trade-as-share-of-gdp.csv")
+
+#Read National GDP data
+gdp <- read_csv("national-gdp-constant-usd-wb.csv")
+gdp_per_capita <- read_csv("gdp-per-capita-world-bank-constant-usd.csv")
+
+#Read Life Expectancy data
+life_expectancy <- read_csv("life-expectancy.csv")
+
+#Read Education data
+primary_female <- read_csv("enrolment-primary-female.csv")
+primary_male <- read_csv("enrolment-primary-male.csv")
+secondary_female <- read_csv("enrolment-secondary-female.csv")
+secondary_male <- read_csv("enrolment-secondary-male.csv")
+tertiary_female <- read_csv("enrolment-tertiary-female.csv")
+tertiary_male <- read_csv("enrolment-tertiary-male.csv")
+edu_vnm <- read_csv("primary-secondary-enrollment-completion-rates.csv")
+
+#Read Healthcare data
+health_expend <- read_csv("out-of-pocket-expenditure-per-capita-on-healthcare.csv")
+health_ODA <- read_csv("BBF3A64_ALL_LATEST.csv")
+health_household_expend <- read_csv("A65146D_ALL_LATEST.csv")
+
+#Read population data
+population_vnm <- read_csv("Vietnam-population.csv")
+```
+
+## The Impact of The Vietnam War and How The Nation Bounced Back
+
+### The United States' Weaponry 
+
+```{r, include=FALSE}
+#========================================= WEAPONRY =============================================#
+
+#Number of weapon for each class
+count_weapon <- weapon %>% 
+  select(`WEAPON_CLASS`,`WEAPON_COUNT`) %>%
+  group_by(`WEAPON_CLASS`) %>%
+  summarise(TOTAL = sum(WEAPON_COUNT, na.rm = TRUE)) %>%
+  mutate(WEAPON_CLASS = factor(WEAPON_CLASS, levels = c("BOMB", setdiff(WEAPON_CLASS, "BOMB")))) %>%
+  arrange(desc(TOTAL)) %>%
+  mutate(PERCENTAGE = round(TOTAL / sum(TOTAL) * 100, 1),  
+         label = paste0(PERCENTAGE, "%"))
+
+#Convert weapon class into factor  
+count_weapon <- count_weapon %>%
+  mutate(WEAPON_CLASS = factor(WEAPON_CLASS, levels = c("MISSILE","GUN","ROCKET","SUPPORT","BOMB")))
+
+#Show data frame
+head(count_weapon)
+```
+
+```{r, fig.width=10}
+#Bar chart
+bar_weapon  <- 
+  ggplot(data = count_weapon, 
+       aes(x = TOTAL, 
+           y = `WEAPON_CLASS`,
+           fill = `WEAPON_CLASS`
+       )) +
+  geom_col() +
+  labs(title = "America's Weaponry Used in The Vietnam War",
+       x = "Tota Amount",
+       y = "Weapon Type") +
+  scale_fill_manual(values = c(
+      "BOMB" = "#377eb8",
+      "GUN" = "#00c698",
+      "MISSILE" = "#E66100",
+      "SUPPORT" = "#AD105D",
+      "ROCKET" = "#E1BE6A"
+  )) +
+  theme_light() +
+  theme(legend.position = "none",
+        plot.title = element_text(size = 15, hjust = 0.5),
+        axis.text.y = element_blank(),
+        plot.background = element_rect(fill = "#fff5ee"),
+        panel.background = element_rect(fill = "#fff5ee"),
+        panel.grid.major.x = element_line(color = "#7f7f7f",
+                                          linetype = "dashed",
+                                          linewidth = .2),
+        panel.grid.major.y = element_line(color = "#7f7f7f",
+                                          linetype = "dashed",
+                                          linewidth = .2))
+
+#Treemap
+treemap_weapon <- 
+  ggplot(count_weapon,
+         aes(area = PERCENTAGE,
+             fill = WEAPON_CLASS,
+             label = label)) +
+    geom_treemap(color = "white", size = 1.5) +  # Treemap rectangles
+    geom_treemap_text(fontface = "bold", colour = "white", place = "topleft", grow = FALSE, size = 10) +
+    scale_fill_manual(
+      values = c("BOMB" = "#377eb8",
+                 "GUN" = "#00c698",
+                 "MISSILE" = "#E66100",
+                 "SUPPORT" = "#AD105D",
+                 "ROCKET" = "#E1BE6A")) +
+    scale_color_manual (values = "White") +
+    labs(fill = "") +
+    theme_minimal() +
+    theme(legend.position = "bottom",
+          plot.background = element_rect(fill = "#fff5ee"))
+
+#Facetted charts
+plot_grid(bar_weapon, treemap_weapon, ncol = 1, rel_heights = c(1, 1.2))
+```
+
+***
+
+Within the amount of weapon the American carried into the Vietnam War, bombs contributed almost three-fourth of the total weaponry while ordnance such as rockets, missiles and arms were approximately 15%. Supporting military supplies like equipment, ammunition, etc. were the rest 10% to smoulder Vietnam. Moreover, an enormous military resources at about 1 trillion USD had been spent during the period 1964 - 1975.
+
+
+
+### US Airstrikes Operation
+
+```{r, include=FALSE}
+#==================================Latitude & Longtitude of Airstrikes==================================#
+
+#Subseting & Preprocessing
+operation_lat_lon <- operation %>%
+  select(COUNTRYFLYINGMISSION, TGTLATDD_DDD_WGS84, TGTLONDDD_DDD_WGS84,MFUNC_DESC) %>%
+  filter(!is.na(TGTLATDD_DDD_WGS84) & !is.na(COUNTRYFLYINGMISSION)  # Remove missing values in latitude and country
+         ) %>%
+  filter(MFUNC_DESC == "STRIKE" | MFUNC_DESC == "LLLTV STRIKE") %>% # Filter airstrikes only
+  mutate(TGTLATDD_DDD_WGS84 = round(TGTLATDD_DDD_WGS84, 2),
+         TGTLONDDD_DDD_WGS84 = round(TGTLONDDD_DDD_WGS84, 2))       # Round latitude and lontitude
+
+#Remove duplicates
+operation_lat_lon <- operation_lat_lon %>% distinct()
+
+#Remove outliers
+operation_lat_lon <- operation_lat_lon %>%
+  filter(TGTLATDD_DDD_WGS84 >= 8 & TGTLATDD_DDD_WGS84 <= 23,        # Latitude range for Vietnam
+         TGTLONDDD_DDD_WGS84 >= 102 & TGTLONDDD_DDD_WGS84 <= 110)   # Longtitude range for Vietnam
+
+#Show dataframe
+head(operation_lat_lon)
+```
+
+```{r, include=FALSE}
+# Assume your data frame is called `bombing_operation`
+vietnam_map <- st_read("vnm_adm_gov_20201027/vnm_admbnda_adm1_gov_20201027.shp")
+```
+
+```{r, fig.width=10}
+#Create map
+ggplot(data = vietnam_map) +
+  geom_sf(fill = "#f0f8ff", color = "black") +
+  geom_point(data = operation_lat_lon, 
+             aes(x = TGTLONDDD_DDD_WGS84, y = TGTLATDD_DDD_WGS84, color = "#7e0000"), 
+             size = 0.4, alpha = 0.1) +
+  labs(title = "Airstrike Operations in Vietnam",
+       subtitle = "The map shows the location of airstrikes during 1964 - 1973",
+       x = "Longitude", 
+       y = "Latitude") +
+  theme_light() +
+  theme(legend.position = "none",
+        axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        plot.title = element_text(size = 15, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.background = element_rect(fill = "#fff5ee"),
+        panel.background = element_rect(fill = "#fff5ee"),
+        panel.grid.major.x = element_line(color = "#7f7f7f",
+                                          linetype = "dashed",
+                                          linewidth = .2),
+        panel.grid.major.y = element_line(color = "#7f7f7f",
+                                          linetype = "dashed",
+                                          linewidth = .2)) +
+  
+  # Add annotation to label the dense area
+  annotate("text", 
+           x = 103.5, 
+           y = 15, 
+           label = "Laos \n  \n Cambodia", 
+           color = "#580000", 
+           size = 3, 
+           family = "Lato",
+           fontface = "bold") + # Text annotation for Laos and Cambodia
+  annotate("curve",
+           x = 103.5, xend = 104.5,
+           y = 16, yend = 16.5,
+           curvature = -0.25,
+           color = "#580000",
+           size = 1,
+           arrow = arrow(length = unit(0.06, "inches"),
+                                      type = "closed")) + # First arrow annotation for Laos
+   annotate("curve",
+           x = 103.5, xend = 103,
+           y = 16, yend = 18.7,
+           curvature = -0.25,
+           color = "#580000",
+           size = 1,
+           arrow = arrow(length = unit(0.06, "inches"),
+                                      type = "closed")) + # Second arrow annotation for Laos
+  annotate("curve",
+           x = 103.5, xend = 104.5,
+           y = 14, yend = 13,
+           curvature = 0.25,
+           color = "#580000",
+           size = 1,
+           arrow = arrow(length = unit(0.06, "inches"),
+                                      type = "closed")) + # Arrow annotation for Cambodia
+  geom_ellipse(aes(x0 = 107, 
+                   y0 = 18.5, 
+                   a = 1.5, 
+                   b = 4.3, 
+                   angle = 120), 
+               fill = "#a5a5a5", 
+               alpha = 0.006) + # Highlight annotation for Vietnam
+  annotate("text", 
+           x = 113, 
+           y = 19, 
+           label = "North and Central of Vietnam \n was mainly bombed", 
+           color = "#580000", 
+           size = 3, 
+           family = "Lato",
+           fontface = "bold") + # Text annotation for Vietnam
+   annotate("curve",
+           x = 109.9, xend = 108.8,
+           y = 18.7, yend = 18.5,
+           curvature = 0.25,
+           color = "#580000",
+           size = 1,
+           arrow = arrow(length = unit(0.06, "inches"),
+                                      type = "closed"))
+```
+
+***
+
+According to the map, the US was bombing mostly the Central and North of Vietnam to eliminate the Viet Cong's bases and troops. Laos and Cambodia were also assaulted to cease supports for the insurgency, as Vietnamese armies were stationed in the the forest which was also the Laos and Cambodia borders.The amount of bomb was believed to reach up to 7.5 millions tons in total including conventional, guided, and aerosol bombs.
+
+
+
+### Casualties During War
+
+```{r, include = FALSE}
+#================================= Casualties and Fatalities ============================#
+
+# Cleaning data to obtain Vietnam's number of death
+death <- death %>%
+  filter(Entity == "Vietnam") %>%
+  rename(Deaths = "Deaths - Sex: all - Age: all - Variant: estimates")
+
+# Subset to select observations from 1965 - 1973
+casualties_vnm <- death %>%
+  filter(Year >= 1965 & Year <= 1973) %>%
+  select(Year, Deaths)
+
+#Preprocessing USA casualties data
+casualties_usa <- casualties_usa %>%
+  separate(DIED, into = c("DAY", "MONTH", "YEAR"), sep = "/") %>%
+  group_by(YEAR) %>%
+  filter(YEAR >= 1965 & YEAR <= 1973) %>%
+  summarise(CASUALTIES = n()) %>%
+  mutate(YEAR = as.numeric(YEAR))
+
+#Combine datasets to combine casualties - VNM & USA
+casualties_war <- left_join(casualties_vnm, casualties_usa, by = c("Year" = "YEAR"))
+colnames(casualties_war) <- c("Year", "VNM", "USA")
+
+#Convert to long format for the visualization
+casualties_war <- casualties_war %>%
+  pivot_longer(cols = c("VNM", "USA"), names_to = "Country", values_to = "Casualties")
+
+#Factorise VNM & USA
+casualties_war <- casualties_war %>%
+  mutate(Country = factor(Country, levels = c("USA", "VNM")))
+```
+
+```{r, fig.width=10}
+ggplot(casualties_war, 
+       aes(x = Year, 
+           y = Casualties / 1000, 
+           fill = Country,
+           color = Country)
+       ) +
+  geom_col(alpha = 0.8, 
+           position = "stack",  
+           size = 0.5) +
+  labs(title = "Casualties during the Vietnam War",
+       subtitle = "The comparison between Vietnam and The United States casualties",
+       x = "Year", 
+       y = "Number of Casualties (in thousands)") +
+  scale_x_continuous(breaks = c(seq(1965,1973,by=1))) +
+  scale_fill_manual(values = c("VNM" = "#377eb8", "USA" = "#AD105D")) + 
+  scale_color_manual(values = c("VNM" = "#08519c", "USA" = "#750B3F")) +
+  annotate("rect",
+           xmin = 1971.5, xmax = 1972.5, 
+           ymin = 0, ymax = 665,
+           alpha = 0.07, 
+           color = "#8b0000",
+           size = 1.5) +
+  theme_light() +
+  theme(plot.title = element_text(size = 15, hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        plot.background = element_rect(fill = "#fff5ee"),
+        panel.background = element_rect(fill = "#fff5ee"),
+        panel.grid.major.x = element_line(color = "#7f7f7f", 
+                                        linetype = "dashed", 
+                                        linewidth = .2))
+```
+
+***
+
+The peak of the War had witnessed approximately 5 million Vietnamese casualties, the number was estimated for either civilians or soldiers from both South and North of Vietnam. In comparison to Vietnam's, only 57 thousands US military fatal casualties were recorded in total. Even though 1972 was a heart-breaking year with a peak of 660 thousand fatal deaths, the national government was able to force the Americans to enter into a negotiate of signing the Paris Peace Accords in Spring 1973, agreeing on ending the war and restoring peace for Vietnam.
+
+
+
+### Vietnam's Post-War recovery 
+
+```{r, include = FALSE}
+#=================================== GDP Growth ==================================#
+
+#GDP
+gdp <- gdp %>%
+  filter(Entity == "Vietnam") %>%
+  rename(GDP = "GDP (constant 2015 US$)") %>%
+  select(Year, GDP)  
+
+#GDP per capita 
+gdp_per_capita <- gdp_per_capita %>%
+  filter(Entity == "Vietnam") %>%
+  rename("GDP Per Capita" = "GDP per capita (constant 2015 US$)") %>%
+  select(Year, `GDP Per Capita`)
+```
+
+
+```
+
+```{r, include=FALSE}
+#======================================= Shares of GDP ======================================#
+
+#Agriculture
+agri_gdp <- agri_gdp %>%
+  filter(Entity == "Vietnam") %>%
+  rename(Agriculture = "Agriculture, forestry, and fishing, value added (% of GDP)") %>%
+  select(Year, Agriculture)
+
+#Manufacturing
+manu_gdp <- manu_gdp %>%
+  filter(Entity == "Vietnam") %>%
+  rename(Manufacturing = "Manufacturing, value added (% of GDP)") %>%
+  select(Year, Manufacturing)
+
+#Tourism
+tourism_gdp <- tourism_gdp %>%
+  filter(Entity == "Vietnam") %>%
+  rename(Tourism = "GDP from tourism as a share of total GDP") %>%
+  select(Year, Tourism)
+
+#Trade (export & import)
+trade_gdp <- trade_gdp %>%
+  filter(Entity == "Vietnam") %>%
+  rename(Trade = "Trade (% of GDP)") %>%
+  select(Year, Trade)
+
+# Merge the agriculture, manufacturing, and tourism datasets by Year
+shares_gdp <- agri_gdp %>%
+  left_join(manu_gdp, by = "Year") %>%
+  left_join(tourism_gdp, by = "Year") %>%
+  left_join(trade_gdp, by = "Year")
+
+# Convert the data to long format
+shares_gdp <- shares_gdp %>%
+  pivot_longer(cols = c("Agriculture", "Manufacturing", "Tourism", "Trade"),
+               names_to = "Sector",
+               values_to = "GDP_Share") %>%
+  mutate(GDP_Share = ifelse(is.na(GDP_Share), 0, GDP_Share))
+
+#Factorize the sector to plot stacked area
+shares_gdp$Sector <- factor(shares_gdp$Sector, levels = c("Trade", "Manufacturing", "Tourism", "Agriculture"))
+```
+
+```{r, fig.width=10}
+#Area Chart
+area_share <-
+  ggplot(shares_gdp,
+         aes(x = Year,
+             y = GDP_Share,
+             fill = Sector)) +
+    geom_area(alpha = 0.5,
+              size = 1,
+              position = "stack") +
+    geom_line(aes(color = Sector),
+              size = 1,
+              position = "stack") +
+    labs(title = "Vietnam's recovery in terms of GDP",
+         subtitle = "GDP growth and its shares by sector",
+         x = "Year",
+         y = "Share of GDP (%)") +
+    scale_fill_manual(values = c("Trade" = "#377eb8",
+                                 "Manufacturing" = "#FF6347",
+                                 "Agriculture" = "#4daf4a",
+                                 "Tourism" = "#f2eb07")) +
+    scale_color_manual(values = c("Trade" = "#08519c",
+                                  "Manufacturing" = "#7e0000",
+                                  "Agriculture" = "#357933",
+                                  "Tourism" = "#b9b540")) +
+    theme_minimal()+
+    theme(plot.title = element_text(size = 15, hjust = 0.5),
+          plot.subtitle = element_text(hjust = 0.5),
+          legend.position = "bottom",
+          plot.background = element_rect(fill = "#fff5ee"),
+          panel.background = element_rect(fill = "#fff5ee"),
+          panel.grid.major.x = element_line(color = "#7f7f7f", 
+                                        linetype = "dashed", 
+                                        linewidth = .2))
+
+#Line Chart
+line_gdp <-
+  ggplot(gdp,
+         aes(x = Year,
+             y = GDP / 10e9)) +
+  geom_line(size = 1, color = "#d2a457") +
+  labs(title = "",
+       x = "Year",
+       y = "GDP($ in billions)") +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 10, hjust = 0.5),
+        panel.grid.minor = element_blank(),
+        plot.background = element_rect(fill = "#fff5ee"),
+        panel.background = element_rect(fill = "#fff5ee"),
+        panel.grid.major.x = element_line(color = "#7f7f7f", 
+                                        linetype = "dashed", 
+                                        linewidth = .2))
+
+plot_grid(area_share, line_gdp, ncol = 1, rel_heights = c(1.2, 0.9))
+```
+
+
+***
+
+After the independent day in 30th of April, 1975, the Gross Domestic Product GDP started to be continuously growing until present. For the first 2 decades, agriculture was the main sector contributing to the GDP. Despite the fact that the national GDP still relies on import/export trade for goods and products, Vietnam has seen manufacturing and tourism start to be significant since approaching the 2000s while agriculture share decrease. It is a positive sign of transitioning to industrial & tourism-based economy. 
+
+
+
+### Vietnamese Population Lifestyle Pattern 
+
+```{r, include=FALSE}
+#========================================= Life Expectancy ===========================================#
+
+#Life expectancy
+life_expectancy <- life_expectancy %>%
+  filter(Entity == "Vietnam") %>%
+  rename(Life = "Period life expectancy at birth - Sex: all - Age: 0") %>%
+  select(Year, Life)
+
+life_average <- life_expectancy %>%
+  mutate(Period = ifelse(Year < 1975, "During War", "Post-war")) %>%
+  group_by(Period) %>%
+  summarise(Average_Life_Expectancy = mean(Life, na.rm = TRUE))
+
+life_expectancy_compare <- life_expectancy %>%
+  mutate(Period = ifelse(Year <= 1975, "Before 1975", "After 1975"),
+         Period = factor(Period, levels = c("Before 1975", "After 1975")))
+```
+
+```{r, fig.width=10}
+#Boxplot
+boxplot_life <-
+  ggplot(life_expectancy_compare,
+         aes(x = Life,
+             y = Period, fill = Period)) +
+    geom_boxplot() +
+    geom_jitter(color = "black", 
+                size = 1.5, 
+                width = 0.1, 
+                alpha = 0.6) +
+    scale_fill_manual(values = c("Before 1975" = "#FF6347", "After 1975" = "#377eb8")) +
+    coord_flip() +
+    labs(x = NULL,
+         fill = "",
+         subtitle = "The boxplot shows the distribution of life expectancy") +
+    theme_minimal() +
+    theme(legend.position = "none",
+          axis.text.y = element_blank(),
+          axis.title.y = element_blank(),
+          axis.title.x = element_blank(),
+          plot.background = element_rect(fill = "#fff5ee"),
+          panel.background = element_rect(fill = "#fff5ee"),
+          panel.grid.major.x = element_line(color = "#7f7f7f", 
+                                        linetype = "dashed", 
+                                        linewidth = .2))
+
+#Line Chart
+line_life <-
+  ggplot(life_expectancy_compare, 
+         aes(x = Year, 
+             y = Life, group = 1)) + 
+    geom_line(aes(color = Period), 
+              size = 1.2) +
+    geom_vline(xintercept = 1975, 
+               linetype = "dashed", 
+               color = "black", size = 1) +
+    labs(x = NULL,
+         y = "Life Expectancy (years)",
+         subtitle = "The line chart shows changes in life expectancy") +
+    scale_color_manual(values = c("Before 1975" = "#FF6347", "After 1975" = "#377eb8")) + 
+    scale_x_continuous(breaks = c(1960, 1990),
+                       labels = c("Before 1975", "After 1975")) +
+    theme_minimal() +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = "#fff5ee"),
+          panel.background = element_rect(fill = "#fff5ee"),
+          panel.grid.major.x = element_line(color = "#7f7f7f", 
+                                        linetype = "dashed", 
+                                        linewidth = .2)) 
+
+#Facetted chart
+combined_facet_life <- plot_grid(line_life, boxplot_life, ncol = 2, rel_heights = c(1, 1), rel_widths = c(2, 2))
+
+title_life <- 
+  ggdraw() + 
+    draw_label("Life Expectancy Trend and Distribution in Vietnam - Now and Then",
+               fontface = 'bold', size = 14,
+               x = 0.5, hjust = 0.5) +
+    theme(plot.background = element_rect(fill = "#fff5ee", color = NA))
+
+plot_grid(title_life, combined_facet_life, ncol = 1, rel_heights = c(0.1, 1))
+```
+
+
+***
+
+Vietnamese longevity started to increase dramatically after the war and reach its peak at 75 of age. The lowest life expectancy was about 55 years old during the peak duration 1965-1973. It was slightly risen up to 60, then dropped after the US began bombing operation. The average post-war life expectancy is recorded at around 73 and was believed to keep moving forward the uptrend.
+
+
+
+### Contribution of Healthcare Expenditure by Composition
+
+```{r, include=FALSE}
+#======================================= Healthcare =========================================#
+
+# Expenditure on Healthcare per capita
+health_expend <- health_expend %>%
+  filter(Entity == "Vietnam") %>%
+  rename(Expenditure = "Out-of-pocket expenditure per capita, PPP (current international $)") %>%
+  select(Year, Expenditure)
+
+# 10% of Household expenditure on Healthcare by Areas
+health_household_expend_area <- health_household_expend %>%
+  filter(GEO_NAME_SHORT == "Viet Nam") %>%
+  filter(DIM_DEG_URB %in% c("RURAL","URBAN","TOTAL")) %>%
+  rename(Year = "DIM_TIME",
+         Area = "DIM_DEG_URB",
+         Proportion = "PERCENT_POP_N") %>%
+  select(Year, Area, Proportion) %>%
+  arrange(Year)
+
+# 10% of Household expenditure on Healthcare by composition
+health_household_expend_comp <- health_household_expend %>%
+  filter(GEO_NAME_SHORT == "Viet Nam",
+         DIM_HOUSEHOLD_COMP_BY_AGE %in% c("HH_COMP_ADULTS", 
+                                        "HH_COMP_ADULTS_WITH_KIDS", 
+                                        "HH_COMP_ADULTS_WITH_OLDER", 
+                                        "HH_COMP_MULTIGEN", 
+                                        "HH_COMP_MULTIGEN_WITH_OLDER", 
+                                        "HH_COMP_ONLY_OLDER_ADULTS")
+         ) %>%
+  rename(Year = "DIM_TIME",
+         Composition = "DIM_HOUSEHOLD_COMP_BY_AGE",
+         Proportion = "PERCENT_POP_N") %>%
+  mutate(Composition = ifelse(Composition == "HH_COMP_ADULTS", "Adults Only",
+                              ifelse(Composition == "HH_COMP_ADULTS_WITH_KIDS", "Adults with Kids",
+                                     ifelse(Composition == "HH_COMP_ADULTS_WITH_OLDER","Adults with Elders",
+                                            ifelse(Composition == "HH_COMP_MULTIGEN", "Multigen",
+                                                   ifelse(Composition == "HH_COMP_MULTIGEN_WITH_OLDER","Multigen with Elders","Elders Only")))))) %>% 
+  select(Year, Composition, Proportion) %>%
+  arrange(Year)
+
+#============================================ Population ==========================================#
+
+#Vietnam population data 
+population_vnm <- population_vnm %>%
+  filter(`Country Code` == "VNM") %>%
+  select(-c("Country Name", "Country Code", "Indicator Name", "Indicator Code")) %>%
+  pivot_longer(cols = 1:64,
+               names_to = "Year",
+               values_to = "Population") %>%
+  mutate(Year = as.numeric(Year))
+
+#-----------------------------------------------------------------------------------------------#
+# Merge data sets to find the population spend 10% household expenditure to health services 
+health_household_expend_area <- 
+  left_join(health_household_expend_area, population_vnm, by = "Year") %>%
+  mutate(Household = (`Population` * `Proportion`)/100)
+  
+health_household_expend_comp <- 
+  left_join(health_household_expend_comp, population_vnm, by = "Year") %>%
+  mutate(Household = (`Population` * `Proportion`)/100)
+#-----------------------------------------------------------------------------------------------#
+
+# Mutate data to plot 100 stacked bar
+health_household_expend_comp_perc <- 
+  health_household_expend_comp %>%
+  group_by(Year, Composition) %>%
+  summarize(TotalHousehold = sum(Household, na.rm = TRUE)) %>%
+  ungroup() %>%
+  group_by(Year) %>%
+  mutate(Percentage = TotalHousehold / sum(TotalHousehold) * 100)
+
+```
+
+```{r, fig.width=10}
+# 100% Stacked Bar Chart
+ggplot(health_household_expend_comp_perc, 
+         aes(x = factor(Year), 
+             y = Percentage, 
+             fill = Composition)) +
+  geom_bar(stat = "identity", 
+           position = "fill", 
+           width = 0.9) +  
+  scale_y_continuous(labels = scales::percent) +  
+  scale_fill_brewer(palette = "Dark2") + 
+  labs(title = "Population with household expenditure on health > 10% of total income",
+       subtitle = "The stacked bar shows the distribution of each household composition 1992 - 2018",
+       x = "Year",
+       y = "Contribution (%)",
+       fill = "") +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        plot.background = element_rect(fill = "#fff5ee"),
+        panel.grid.major.x = element_line(color = "#7f7f7f", 
+                                          linetype = "dashed", 
+                                          linewidth = .2))
+
+```
+
+
+***
+
+Compositions with elderly people seems to contribute more than those are having adults and younger generations while the contribution of households for other composition group that recorded more than 10% of their income on health started to be insignificant. As a result, it can be said that the Vietnamese population have been starting to take care of the elder by willing to spend more on their healthcare systems, resulting in the high life expectancy.
+
+
+
+### Pattern of Household Expenditure by Composition
+
+```{r, fig.width=10}
+# Sankey Bump Diagram
+ggplot(health_household_expend_comp,
+       aes(x = Year,
+             value = Household / 1e6,
+             node = Composition,
+             fill = Composition)) +
+  geom_sankey_bump(space = 0.5, smooth = 8, color="transparent", alpha = 0.95) +
+  scale_x_continuous(limits = c(1992,2018.1),
+                     breaks = c(seq(1992,2018,by=1)),
+                     expand = c(0,0)) +
+  scale_y_continuous(expand = c(0,0),
+                     limits = c(-60, 60),
+                     breaks = c(-48, -34, -19, 0, 20, 40, 60),
+                     labels = c("Adults with Kids", "Adults Only", "Adults with Elders",
+                                "Multigen with Elders", "Multigen", "Elders Only", "**Composition**"),
+                     sec.axis = sec_axis(~.,
+                                         breaks = c(seq(-60,60,by = 10)),
+                                         labels = c(seq(6,23,by = 1.5), "**Household (millions)**")))+
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal()+
+  theme(legend.position = "none",
+        plot.background = element_rect(fill = "#fff5ee"),
+        panel.grid.major.x = element_line(color = "#7f7f7f", 
+                                          linetype = "dashed", 
+                                          linewidth = .2),
+        axis.title.y = element_blank(),
+        axis.text.y.left = element_markdown(),   # Enable Markdown formatting on primary y-axis
+        axis.text.y.right = element_markdown()) +
+  labs(title = "Population with household expenditure on health > 10% of total income",
+       subtitle = "The sankey bump diagram shows the pattern by each household composition 1992 - 2018",
+       x = "Year",
+       y = "Population",
+       fil = "")
+
+```
+
+
+***
+
+The overall number of households which spend more than 10% of their total income decrease, meaning that less younger Vietnamese generation need to spend money on treatments as a result of better health condition nowadays. Regardless of the increasing total population, the proportion of these households seem to either remain unchanged or slightly fluctuate.
+
+
+### Education Now and Then
+
+```{r}
+#======================================= Education ==========================================#
+
+#Preprocessing enrolment datasets to find Vietnam data
+primary_female <- primary_female %>%
+  filter(`Country Code` == "VNM") %>%
+  select("1976", "2022") %>%
+  pivot_longer(cols = c("1976", "2022"), 
+               names_to = "Year", 
+               values_to = "Enrolment") %>%
+  mutate(Level = "Primary", Gender = "Female")
+
+primary_male <- primary_male %>%
+  filter(`Country Code` == "VNM") %>%
+  select("1976", "2022") %>%
+  pivot_longer(cols = c("1976", "2022"), 
+               names_to = "Year", 
+               values_to = "Enrolment") %>%
+  mutate(Level = "Primary", Gender = "Male")
+
+secondary_female <- secondary_female %>%
+  filter(`Country Code` == "VNM") %>%
+  select("1976", "2022") %>%
+  pivot_longer(cols = c("1976", "2022"), 
+               names_to = "Year", 
+               values_to = "Enrolment") %>%
+  mutate(Level = "Secondary", Gender = "Female")
+
+secondary_male <- secondary_male %>%
+  filter(`Country Code` == "VNM") %>%
+  select("1976", "2022") %>%
+  pivot_longer(cols = c("1976", "2022"), 
+               names_to = "Year", 
+               values_to = "Enrolment") %>%
+  mutate(Level = "Secondary", Gender = "Male")
+
+tertiary_female <- tertiary_female %>%
+  filter(`Country Code` == "VNM") %>%
+  select("1976", "2022") %>%
+  pivot_longer(cols = c("1976", "2022"), 
+               names_to = "Year", 
+               values_to = "Enrolment") %>%
+  mutate(Level = "Tertiary", Gender = "Female")
+
+tertiary_male <- tertiary_male %>%
+  filter(`Country Code` == "VNM") %>%
+  select("1976", "2022") %>%
+  pivot_longer(cols = c("1976", "2022"), 
+               names_to = "Year", 
+               values_to = "Enrolment") %>%
+  mutate(Level = "Tertiary", Gender = "Male")
+
+#------------------------------------------------#
+edu_vnm <- edu_vnm %>%
+  filter(Entity == "Vietnam") %>%
+  filter(Year <= 2022) %>%
+  rename(Primary = "Gross enrolment ratio, primary, both sexes (%)",
+         Secondary = "Gross enrolment ratio, secondary, both sexes (%)",
+         Tertiary = "Gross enrolment ratio for tertiary education, both sexes (%), GER.5T8") %>%
+  select(Year, Primary, Secondary, Tertiary) %>%
+  # Calculate relative changes in primary education to fill up secondary and tertiary  
+  mutate(Change = Primary/ lag(Primary))
+
+
+#------------------------------------------------#
+
+#Merge data
+edu_enrol <- bind_rows(primary_female, primary_male, 
+                           secondary_female, secondary_male, 
+                           tertiary_female, tertiary_male)
+
+#Convert Enrolment ratio to negative to plot diverging bar chart
+edu_enrol <- edu_enrol %>%
+  mutate(Value = ifelse(Year == 1976, -Enrolment, Enrolment)) %>%
+  group_by(Gender, Level)
+
+#Subset data for Female and Male
+edu_enrol_female <- edu_enrol %>%
+  filter(Gender == "Female") %>%
+  group_by(Year, Level)
+
+edu_enrol_male <- edu_enrol %>%
+  filter(Gender == "Male") %>%
+  group_by(Year, Level)
+
+#------------------------------------#
+#Fill missing values using relative changes of Primary education enrolment
+while(any(is.na(edu_vnm$Secondary))) {
+  edu_vnm <- edu_vnm %>%
+    mutate(Secondary = ifelse(is.na(Secondary),
+                              lag(Secondary) * Change,
+                              Secondary))
+}
+ 
+while(any(is.na(edu_vnm$Tertiary))) {
+  edu_vnm <- edu_vnm %>%
+    mutate(Tertiary = ifelse(is.na(Tertiary),
+                             lag(Tertiary) * Change,
+                             Tertiary))
+}
+
+#Convert to longer form
+edu_vnm <- edu_vnm %>%
+  pivot_longer(cols = c("Primary","Secondary","Tertiary"),
+               names_to = "Level",
+               values_to = "Ratios") %>%
+  select(Year,Level,Ratios)
+#-------------------------------------#
+```
+
+```{r, fig.width=10}
+#Female
+bar_female <-
+  ggplot(edu_enrol_female,
+         aes(x= Level,
+             y = Value,
+             fill = Year)) +
+    geom_col(position = "identity", show.legend = TRUE) +
+    labs(x = NULL,
+         y = "Enrolment Ratios (%)", 
+         title = "Education Enrolment Ratios between 1976 and 2022",
+         subtitle = "Female") +
+    scale_fill_manual(values = c("#750B3F", "#E1BE6A"), 
+                      labels = c("1976", "2022")) +
+    coord_flip() +
+    scale_y_continuous(labels = abs)  + 
+    theme_minimal() +
+    theme(panel.grid.major.y = element_blank(),
+          legend.position = "bottom",
+          plot.background = element_rect(fill = "#fff5ee"),
+          legend.title = element_blank(),
+          axis.ticks = element_blank(),
+          strip.text = element_blank(),
+          panel.grid.major.x = element_line(color = "#7f7f7f",
+                                            linetype = "dashed",
+                                            linewidth = .2),
+          plot.title = element_text(size = 12, hjust = 0.5),
+          plot.subtitle = element_text(size = 8, hjust = 0.5))
+
+#Male
+bar_male <-
+  ggplot(edu_enrol_male,
+         aes(x = Level,
+             y = Value,
+             fill = Year)) +
+    geom_col(position = "identity", show.legend = FALSE) +
+    labs(x = NULL, 
+         y = "Enrolment Ratios (%)",
+         subtitle = "Male") +
+    scale_fill_manual(values = c("#750B3F", "#E1BE6A"), 
+                      labels = c("1976", "2022")) +
+    coord_flip() +
+    scale_y_continuous(labels = abs) +
+    theme_minimal() +
+    theme(panel.grid.major.y = element_blank(), 
+          plot.background = element_rect(fill = "#fff5ee"),
+          strip.text = element_blank(),
+          axis.ticks = element_blank(),
+          panel.grid.major.x = element_line(color = "#7f7f7f",
+                                          linetype = "dashed",
+                                          linewidth = .2),
+          plot.title = element_text(size = 12, hjust = 0.5),
+          plot.subtitle = element_text(size = 8, hjust = 0.5)) 
+
+#Facet 2 plot by gender
+bar_edu_gender <- plot_grid(bar_female, bar_male, ncol = 1, rel_heights = c(1.4,1))
+
+#Line chart showing the overall changes in education enrollment
+line_edu <- 
+  ggplot(edu_vnm,
+         aes(x = Year,
+             y= Ratios,
+             color = Level)
+         ) +
+  geom_line(size = 1) +
+  labs(title = "Education Enrolment Ratios Over Time",
+       x = "Year",
+       y = "Enrolment Ratios") +
+  scale_color_manual(values = c("#7570b3","#d95f02", "#e7298a")) +
+  theme_minimal() +
+  theme(plot.title = element_text(size = 12, hjust = 0.5),
+        plot.background = element_rect(fill = "#fff5ee"),
+        panel.grid.major.x = element_line(color = "#7f7f7f", 
+                                        linetype = "dashed", 
+                                        linewidth = .2)) +
+  annotate("rect",
+           xmin = 1999.5, xmax = 2010, 
+           ymin = 45, ymax = 117,
+           alpha = 0.07, 
+           color = "#580000",
+           size = 0.5) + # 2010 Global Recession
+  annotate("rect",
+           xmin = 1980, xmax = 1990, 
+           ymin = 37, ymax = 113,
+           alpha = 0.07, 
+           color = "#580000",
+           size = 0.5) + # 1986 economical recovery
+  annotate("text",
+           x = 1995, 
+           y = 125, 
+           label = "Economic Crises \n caused downfall in enrolment rates", 
+           color = "#580000", 
+           size = 3, 
+           family = "Lato",
+           fontface = "bold") + # Annotation text for 2 economic crises periods
+  annotate("curve",
+           x = 2005, xend = 2005.5,
+           y = 120, yend = 117.5,
+           curvature = -0.25,
+           color = "#580000",
+           size = 0.7,
+           arrow = arrow(length = unit(0.06, "inches"),
+                                      type = "closed")) + # Arrow points the 2010 global recession
+  annotate("curve",
+           x = 1985.5, xend = 1985,
+           y = 120, yend = 113.5,
+           curvature = 0.25,
+           color = "#580000",
+           size = 0.7,
+           arrow = arrow(length = unit(0.06, "inches"),
+                                      type = "closed")) + # Arrow points the market economy transition
+  annotate("text",
+           x = 1985,
+           y = 10,
+           label = "Tertiary education level \n kept increasing",
+           color = "#580000",
+           size = 3,
+           familty = "Lato",
+           fontface = "bold")  # Annotation text for Tertiary
+  
+
+#Facet 3 plot
+plot_grid(bar_edu_gender, line_edu, ncol = 2, rel_heights = c(1, 1))
+```
+
+
+***
+
+The bar chart displays that Primary education is a mandatory standard since the ending of the war. Especially, both genders are equally provided with educational opportunities without any discrimination. There is a huge gap between 1976 and 2022 for Secondary and Tertiary enrolment ratios, showing that Vietnamese people have been emphasizing the important of education. 
+
+
+In 1986, Vietnam was transitioning to market economy leading the country to face economy challenges. A large number of household tended to prioritize working over education, resulted in a drop. Then, the impact of the 2010 global recession to Vietnam's economy was too significant and require recovery that once again pulled the enrolment ratios down.
+
+
