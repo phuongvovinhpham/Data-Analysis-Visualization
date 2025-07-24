@@ -1,0 +1,236 @@
+location,iso_code,source_name,source_website
+Afghanistan,AFG,World Health Organization,https://data.who.int/dashboards/covid19/
+Albania,ALB,World Health Organization,https://data.who.int/dashboards/covid19/
+Algeria,DZA,World Health Organization,https://data.who.int/dashboards/covid19/
+Andorra,AND,World Health Organization,https://data.who.int/dashboards/covid19/
+Angola,AGO,World Health Organization,https://data.who.int/dashboards/covid19/
+Anguilla,AIA,World Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Antigua and Barbuda,ATG,Ministry of Health,https://covid19.who.int/
+Argentina,ARG,Ministry of Health,https://covidstats.com.ar/
+Armenia,ARM,World Health Organization,https://data.who.int/dashboards/covid19/
+Aruba,ABW,Government of Aruba,https://www.government.aw
+Australia,AUS,Government of Australia via CovidBaseAU,https://data.who.int/dashboards/covid19/
+Austria,AUT,European CDC,https://www.ecdc.europa.eu/en/publications-data/data-covid-19-vaccination-eu-eea
+Azerbaijan,AZE,Government of Azerbaijan,https://koronavirusinfo.az
+Bahamas,BHS,Pan American Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Bahrain,BHR,Ministry of Health,https://data.who.int/dashboards/covid19/
+Bangladesh,BGD,Directorate General of Health Services,http://103.247.238.92/webportal/pages/covid19-vaccination-update.php
+Barbados,BRB,Ministry of Health,https://data.who.int/dashboards/covid19/
+Belarus,BLR,World Health Organization,https://data.who.int/dashboards/covid19/
+Belgium,BEL,Sciensano,https://epistat.wiv-isp.be/covid/
+Belize,BLZ,World Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Benin,BEN,Ministry of Health,https://data.who.int/dashboards/covid19/
+Bermuda,BMU,Pan American Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Bhutan,BTN,World Health Organization,https://data.who.int/dashboards/covid19/
+Bolivia,BOL,Ministry of Health via https://www.boligrafica.com/,https://github.com/dquintani/vacunacion/
+Bonaire Sint Eustatius and Saba,BES,World Health Organization,https://www.rivm.nl/sites/default/files/2021-09/COVID-19_website_rapport_eilanden_engels_35_20210902_1409.pdf
+Bosnia and Herzegovina,BIH,World Health Organization,https://data.who.int/dashboards/covid19/
+Botswana,BWA,Africa Centres for Disease Control and Prevention,https://data.who.int/dashboards/covid19/
+Brazil,BRA,State governments via coronavirusbra1.github.io,https://coronavirusbra1.github.io
+British Virgin Islands,VGB,World Health Organization,https://covid19.who.int/
+Brunei,BRN,World Health Organization,https://data.who.int/dashboards/covid19/
+Bulgaria,BGR,Ministry of Health,https://coronavirus.bg/bg/statistika
+Burkina Faso,BFA,World Health Organization,https://data.who.int/dashboards/covid19/
+Burundi,BDI,World Health Organization,https://data.who.int/dashboards/covid19/
+Cambodia,KHM,World Health Organization,https://data.who.int/dashboards/covid19/
+Cameroon,CMR,World Health Organization,https://data.who.int/dashboards/covid19/
+Canada,CAN,Official data from provinces via covid19tracker.ca,https://covid19tracker.ca/vaccinationtracker.html
+Cape Verde,CPV,World Health Organization,https://data.who.int/dashboards/covid19/
+Cayman Islands,CYM,World Health Organization,https://data.who.int/dashboards/covid19/
+Central African Republic,CAF,Africa Centres for Disease Control and Prevention,https://data.who.int/dashboards/covid19/
+Chad,TCD,Africa Centres for Disease Control and Prevention,https://data.who.int/dashboards/covid19/
+Chile,CHL,"Ministry of Health, via Ministry of Science GitHub repository",https://data.who.int/dashboards/covid19/
+China,CHN,National Health Commission,https://www.chinacdc.cn/jkzt/crb/zl/szkb_11803/jszl_13141/202302/t20230211_263697.html
+Colombia,COL,World Health Organization,https://data.who.int/dashboards/covid19/
+Comoros,COM,World Health Organization,https://data.who.int/dashboards/covid19/
+Congo,COG,Africa Centres for Disease Control and Prevention,https://data.who.int/dashboards/covid19/
+Cook Islands,COK,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Costa Rica,CRI,Costa Rican Social Security Fund,https://data.who.int/dashboards/covid19/
+Cote d'Ivoire,CIV,World Health Organization,https://covid19.who.int/
+Croatia,HRV,Ministry of Health,https://www.koronavirus.hr
+Cuba,CUB,Ministry of Health,https://salud.msp.gob.cu/actualizacion-de-la-vacunacion-en-el-marco-de-los-estudios-de-los-candidatos-vacunales-cubanos-y-la-intervencion-sanitaria/
+Curacao,CUW,Government of Curacao,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Cyprus,CYP,Ministry of Health,https://www.moh.gov.cy/moh/moh.nsf/All/0EFA027144C9E54AC22586BE0032B2F5
+Czechia,CZE,Ministry of Health,https://onemocneni-aktualne.mzcr.cz/covid-19
+Democratic Republic of Congo,COD,World Health Organization,https://data.who.int/dashboards/covid19/
+Denmark,DNK,Statens Serum Institute,https://www.ecdc.europa.eu/en/publications-data/data-covid-19-vaccination-eu-eea
+Djibouti,DJI,World Health Organization,https://data.who.int/dashboards/covid19/
+Dominica,DMA,Pan American Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Dominican Republic,DOM,Ministry of Public Health,https://vacunate.gob.do
+Ecuador,ECU,Government of Ecuador via Ecuacovid,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Egypt,EGY,World Health Organization,https://data.who.int/dashboards/covid19/
+El Salvador,SLV,Ministry of Health,https://covid19.gob.sv/
+England,OWID_ENG,Government of the United Kingdom,https://coronavirus.data.gov.uk/details/vaccinations
+Equatorial Guinea,GNQ,World Health Organization,https://data.who.int/dashboards/covid19/
+Estonia,EST,National Health Board,https://opendata.digilugu.ee
+Eswatini,SWZ,World Health Organization,https://data.who.int/dashboards/covid19/
+Ethiopia,ETH,World Health Organization,https://data.who.int/dashboards/covid19/
+Faeroe Islands,FRO,Government of the Faeroe Islands,https://corona.fo/api
+Falkland Islands,FLK,Government of the Falkland Islands,https://www.facebook.com/FalkIandsGov/posts/4401230323224594
+Fiji,FJI,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Finland,FIN,Finnish Institute for Health and Welfare,https://sampo.thl.fi/pivot/prod/en/vaccreg/cov19cov/fact_cov19cov
+France,FRA,Public Health France,https://www.data.gouv.fr/fr/datasets/donnees-relatives-aux-personnes-vaccinees-contre-la-covid-19-1/
+French Polynesia,PYF,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Gabon,GAB,Africa Centres for Disease Control and Prevention,https://data.who.int/dashboards/covid19/
+Gambia,GMB,Africa Centres for Disease Control and Prevention,https://data.who.int/dashboards/covid19/
+Georgia,GEO,National Center for Disease Control and Public Health,https://vaccines.ncdc.ge/vaccinationprocess/
+Germany,DEU,Robert Koch Institut,https://impfdashboard.de/
+Ghana,GHA,World Health Organization,https://data.who.int/dashboards/covid19/
+Gibraltar,GIB,Government of Gibraltar,https://twitter.com/GibraltarGov/status/1517138573614477315
+Greece,GRC,Ministry of Health,https://www.data.gov.gr/datasets/mdg_emvolio/
+Greenland,GRL,Government of Greenland,https://corona.nun.gl/en/
+Grenada,GRD,World Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Guatemala,GTM,Ministry of Health,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Guernsey,GGY,Government of Guernsey,https://covid19.gov.gg/guidance/vaccine/stats
+Guinea,GIN,National Health Security Agency,https://data.who.int/dashboards/covid19/
+Guinea-Bissau,GNB,World Health Organization,https://data.who.int/dashboards/covid19/
+Guyana,GUY,Ministry of Health,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Haiti,HTI,World Health Organization,https://data.who.int/dashboards/covid19/
+Honduras,HND,World Health Organization,https://data.who.int/dashboards/covid19/
+Hong Kong,HKG,Food and Health Bureau,https://data.gov.hk/en-data/dataset/hk-dh-chpsebcddr-novel-infectious-agent
+Hungary,HUN,Government of Hungary,https://koronavirus.gov.hu//cikkek/6-millio-421-ezer-beoltott-4-397-az-uj-fertozott-es-elhunyt-56-beteg
+Iceland,ISL,Directorate of Health,https://www.covid.is/tolulegar-upplysingar-boluefni
+India,IND,Government of India,https://dashboard.cowin.gov.in/
+Indonesia,IDN,Government of Indonesia,https://data.who.int/dashboards/covid19/
+Iran,IRN,World Health Organization,https://data.who.int/dashboards/covid19/
+Iraq,IRQ,World Health Organization,https://data.who.int/dashboards/covid19/
+Ireland,IRL,Heath Service Executive,https://covid19ireland-geohive.hub.arcgis.com/
+Isle of Man,IMN,Isle of Man Government,https://covid19.gov.im/general-information/covid-19-vaccination-statistics/
+Israel,ISR,Government of Israel,https://datadashboard.health.gov.il/COVID-19/general
+Italy,ITA,Extraordinary commissioner for the Covid-19 emergency,https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.csv
+Jamaica,JAM,Ministry of Health,https://vaccination.moh.gov.jm
+Japan,JPN,Prime Minister's Office,https://www.kantei.go.jp/jp/headline/kansensho/vaccine.html
+Jersey,JEY,Government of Jersey,https://www.gov.je/Datasets/ListOpenData?ListName=COVID19Weekly&clean=true
+Jordan,JOR,World Health Organization,https://data.who.int/dashboards/covid19/
+Kazakhstan,KAZ,Government of Kazakhstan,https://data.who.int/dashboards/covid19/
+Kenya,KEN,World Health Organization,https://data.who.int/dashboards/covid19/
+Kiribati,KIR,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Kosovo,OWID_KOS,Ministry of Health,https://msh.rks-gov.net/sq/statistikat-covid-19/
+Kuwait,KWT,World Health Organization,https://data.who.int/dashboards/covid19/
+Kyrgyzstan,KGZ,Ministry of Health,https://vc.emed.gov.kg/
+Laos,LAO,World Health Organization,https://www.covid19.gov.la/index.php
+Latvia,LVA,National Health Service,https://data.gov.lv/dati/eng/dataset/covid19-vakcinacijas
+Lebanon,LBN,World Health Organization,https://data.who.int/dashboards/covid19/
+Lesotho,LSO,World Health Organization,https://data.who.int/dashboards/covid19/
+Liberia,LBR,World Health Organization,https://data.who.int/dashboards/covid19/
+Libya,LBY,World Health Organization,https://data.who.int/dashboards/covid19/
+Liechtenstein,LIE,Federal Office of Public Health,https://opendata.swiss/en/dataset/covid-19-schweiz?detGeo=FL
+Lithuania,LTU,Ministry of Health,https://experience.arcgis.com/experience/cab84dcfe0464c2a8050a78f817924ca/page/page_3/
+Luxembourg,LUX,Government of Luxembourg,https://covid19.who.int/
+Macao,MAC,Government of Macao,https://www.ssm.gov.mo/apps1/COVID19Case/en.aspx
+Madagascar,MDG,World Health Organization,https://data.who.int/dashboards/covid19/
+Malawi,MWI,World Health Organization,https://data.who.int/dashboards/covid19/
+Malaysia,MYS,Government of Malaysia,https://github.com/MoH-Malaysia/covid19-public
+Maldives,MDV,World Health Organization,https://data.who.int/dashboards/covid19/
+Mali,MLI,World Health Organization,https://data.who.int/dashboards/covid19/
+Malta,MLT,COVID-19 Malta Public Health Response Team,https://github.com/COVID19-Malta/COVID19-Cases
+Mauritania,MRT,Africa Centres for Disease Control and Prevention,https://data.who.int/dashboards/covid19/
+Mauritius,MUS,World Health Organization,https://data.who.int/dashboards/covid19/
+Mexico,MEX,World Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Moldova,MDA,Ministry of Health,https://data.who.int/dashboards/covid19/
+Monaco,MCO,National Council,https://en.gouv.mc/Policy-Practice/Social-Affairs-and-Health/News/Minister-of-State-visits-those-working-to-combat-COVID
+Mongolia,MNG,Ministry of Health via ikon.mn,https://ikon.mn/
+Montenegro,MNE,Government of Montenegro,https://www.covidodgovor.me/
+Montserrat,MSR,World Health Organization,https://covid19.who.int/
+Morocco,MAR,World Health Organization,https://data.who.int/dashboards/covid19/
+Mozambique,MOZ,World Health Organization,https://data.who.int/dashboards/covid19/
+Myanmar,MMR,World Health Organization,https://data.who.int/dashboards/covid19/
+Namibia,NAM,Africa Centres for Disease Control and Prevention,https://data.who.int/dashboards/covid19/
+Nauru,NRU,World Health Organization,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Nepal,NPL,World Health Organization,https://data.who.int/dashboards/covid19/
+Netherlands,NLD,"European CDC, via Marino van Zelst",https://www.ecdc.europa.eu/en/publications-data/data-covid-19-vaccination-eu-eea
+New Caledonia,NCL,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+New Zealand,NZL,Ministry of Health,https://www.tewhatuora.govt.nz/our-health-system/data-and-statistics/covid-vaccine-data
+Nicaragua,NIC,World Health Organization,https://data.who.int/dashboards/covid19/
+Niger,NER,World Health Organization,https://data.who.int/dashboards/covid19/
+Nigeria,NGA,World Health Organization,https://data.who.int/dashboards/covid19/
+Niue,NIU,SPC Public Health Division,https://data.who.int/dashboards/covid19/
+North Macedonia,MKD,World Health Organization,https://data.who.int/dashboards/covid19/
+Northern Cyprus,OWID_CYN,Ministry of Health,https://asi.saglik.gov.ct.tr/
+Northern Ireland,OWID_NIR,Government of the United Kingdom,https://coronavirus.data.gov.uk/details/vaccinations
+Norway,NOR,Norwegian Institute of Public Health,https://github.com/folkehelseinstituttet/surveillance_data
+Oman,OMN,World Health Organization,https://data.who.int/dashboards/covid19/
+Pakistan,PAK,National Command and Operation Centre,https://data.who.int/dashboards/covid19/
+Palestine,PSE,World Health Organization,https://covid19.who.int/
+Panama,PAN,Pan American Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Papua New Guinea,PNG,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Paraguay,PRY,Pan American Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Peru,PER,Ministerio de Salud via github.com/jmcastagnetto/covid-19-peru-vacunas,https://www.datosabiertos.gob.pe/dataset/vacunacion
+Philippines,PHL,Department of Health via ABS-CBN Investigative and Research Group,https://data.who.int/dashboards/covid19/
+Pitcairn,PCN,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Poland,POL,Ministry of Health,https://www.gov.pl/web/szczepimysie/raport-szczepien-przeciwko-covid-19
+Portugal,PRT,World Health Organization,https://www.ecdc.europa.eu/en/publications-data/data-covid-19-vaccination-eu-eea
+Qatar,QAT,Ministry of Public Health,https://data.who.int/dashboards/covid19/
+Romania,ROU,Government of Romania via datelazi.ro,https://data.who.int/dashboards/covid19/
+Russia,RUS,Official data from local governments via gogov.ru,https://gogov.ru/articles/covid-v-stats
+Rwanda,RWA,World Health Organization,https://data.who.int/dashboards/covid19/
+Saint Helena,SHN,Government of Saint Helena,https://www.sainthelena.gov.sh/2021/news/preliminary-data-from-the-covid-19-vaccination-programme/
+Saint Kitts and Nevis,KNA,Pan American Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Saint Lucia,LCA,Ministry of Health,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Saint Vincent and the Grenadines,VCT,World Health Organization,https://covid19.who.int/
+Samoa,WSM,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+San Marino,SMR,World Health Organization,https://data.who.int/dashboards/covid19/
+Sao Tome and Principe,STP,World Health Organization,https://data.who.int/dashboards/covid19/
+Saudi Arabia,SAU,Saudi Health Council,https://covid19.who.int/
+Scotland,OWID_SCT,Government of the United Kingdom,https://coronavirus.data.gov.uk/details/vaccinations
+Senegal,SEN,World Health Organization,https://data.who.int/dashboards/covid19/
+Serbia,SRB,Government of Serbia,https://vakcinacija.gov.rs/
+Seychelles,SYC,World Health Organization,https://data.who.int/dashboards/covid19/
+Sierra Leone,SLE,World Health Organization,https://data.who.int/dashboards/covid19/
+Singapore,SGP,Government of Singapore,https://data.gov.sg/dataset/covid-19-vaccination
+Sint Maarten (Dutch part),SXM,World Health Organization,https://covid19.who.int/
+Slovakia,SVK,Ministry of Health,https://github.com/Institut-Zdravotnych-Analyz/covid19-data/raw/main/Vaccination/OpenData_Slovakia_Vaccination_AgeGroup_District.csv
+Slovenia,SVN,National Institute of Public Health via covid-19.sledilnik.org,https://covid-19.sledilnik.org/sl/stats
+Solomon Islands,SLB,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Somalia,SOM,World Health Organization,https://data.who.int/dashboards/covid19/
+South Africa,ZAF,Ministry of Health,https://data.who.int/dashboards/covid19/
+South Korea,KOR,Korea Centers for Disease Control and Prevention,https://ncv.kdca.go.kr/
+South Sudan,SSD,World Health Organization,https://data.who.int/dashboards/covid19/
+Spain,ESP,Ministry of Health,https://www.sanidad.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_Comunicacion_20230526.ods
+Sri Lanka,LKA,Ministry of Health's Epidemiology Unit,https://data.who.int/dashboards/covid19/
+Sudan,SDN,World Health Organization,https://data.who.int/dashboards/covid19/
+Suriname,SUR,Government of Suriname,https://laatjevaccineren.sr/
+Sweden,SWE,Public Health Agency of Sweden,https://www.fohm.se/folkhalsorapportering-statistik/statistikdatabaser-och-visualisering/vaccinationsstatistik/statistik-for-vaccination-mot-covid-19/
+Switzerland,CHE,Federal Office of Public Health,https://opendata.swiss/en/dataset/covid-19-schweiz?detGeo=CH
+Syria,SYR,World Health Organization,https://data.who.int/dashboards/covid19/
+Taiwan,TWN,Taiwan Centers for Disease Control,https://www.cdc.gov.tw/Category/Page/9jFXNbCe-sFK9EImRRi2Og
+Tajikistan,TJK,World Health Organization,https://data.who.int/dashboards/covid19/
+Tanzania,TZA,World Health Organization,https://data.who.int/dashboards/covid19/
+Thailand,THA,Government of Thailand,https://ddc.moph.go.th/covid19-dashboard/
+Timor,TLS,World Health Organization,https://data.who.int/dashboards/covid19/
+Togo,TGO,World Health Organization,https://data.who.int/dashboards/covid19/
+Tokelau,TKL,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Tonga,TON,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Trinidad and Tobago,TTO,Ministry of Health,https://services3.arcgis.com/x3I4DqUw3b3MfTwQ/arcgis/rest/services/service_7a519502598f492a9094fd0ad503cf80/FeatureServer/0/query
+Tunisia,TUN,World Health Organization,https://data.who.int/dashboards/covid19/
+Turkey,TUR,COVID-19 Vaccine Information Platform,https://covid19asi.saglik.gov.tr/
+Turkmenistan,TKM,World Health Organization,https://data.who.int/dashboards/covid19/
+Turks and Caicos Islands,TCA,World Health Organization,https://covid19.who.int/
+Tuvalu,TUV,World Health Organization,https://data.who.int/dashboards/covid19/
+Uganda,UGA,World Health Organization,https://data.who.int/dashboards/covid19/
+Ukraine,UKR,Ministry of Health,https://data.who.int/dashboards/covid19/
+United Arab Emirates,ARE,National Emergency Crisis and Disaster Management Authority,https://covid19.who.int/
+United Kingdom,GBR,Government of the United Kingdom,https://coronavirus.data.gov.uk/details/vaccinations
+United States,USA,Centers for Disease Control and Prevention,https://data.cdc.gov/Vaccinations/COVID-19-Vaccination-Trends-in-the-United-States-N/rh2h-3yt2
+Uruguay,URY,Ministry of Health via vacuna.uy,https://monitor.uruguaysevacuna.gub.uy/
+Uzbekistan,UZB,World Health Organization,https://data.who.int/dashboards/covid19/
+Vanuatu,VUT,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Venezuela,VEN,Pan American Health Organization,https://ais.paho.org/imm/IM_DosisAdmin-Vacunacion.asp
+Vietnam,VNM,World Health Organization,https://data.who.int/dashboards/covid19/
+Wales,OWID_WLS,Government of the United Kingdom,https://coronavirus.data.gov.uk/details/vaccinations
+Wallis and Futuna,WLF,SPC Public Health Division,https://stats.pacificdata.org/vis?tm=covid&pg=0&df[ds]=SPC2&df[id]=DF_COVID_VACCINATION&df[ag]=SPC&df[vs]=1.0
+Yemen,YEM,World Health Organization,https://data.who.int/dashboards/covid19/
+Zambia,ZMB,Government of Zambia,https://data.who.int/dashboards/covid19/
+Zimbabwe,ZWE,Ministry of Health,https://www.arcgis.com/home/webmap/viewer.html?url=https://services9.arcgis.com/DnERH4rcjw7NU6lv/ArcGIS/rest/services/Vaccine_Distribution_Program/FeatureServer&source=sd
+Africa,OWID_AFR,,
+Asia,OWID_ASI,,
+Europe,OWID_EUR,,
+European Union,OWID_EUN,,
+High income,OWID_HIC,,
+Low income,OWID_LIC,,
+Lower middle income,OWID_LMC,,
+North America,OWID_NAM,,
+Oceania,OWID_OCE,,
+South America,OWID_SAM,,
+Upper middle income,OWID_UMC,,
+World,OWID_WRL,,
